@@ -86,11 +86,9 @@ export default ({ config, store }) => (WrappedComponent) => class BlockResizeabl
 
     // Do the actual drag operation
     const doDrag = (dragEvent) => {
-      let width = (startWidth + dragEvent.clientX) - startX;
-      let height = (startHeight + dragEvent.clientY) - startY;
+      const width = (startWidth + dragEvent.clientX) - startX;
+      const height = (startHeight + dragEvent.clientY) - startY;
       const block = store.getEditorRef().refs.editor;
-      width = block.clientWidth < width ? block.clientWidth : width;
-      height = block.clientHeight < height ? block.clientHeight : height;
 
       const widthPerc = (100 / block.clientWidth) * width;
       const heightPerc = (100 / block.clientHeight) * height;
@@ -148,18 +146,24 @@ export default ({ config, store }) => (WrappedComponent) => class BlockResizeabl
 
     if (horizontal === 'auto') {
       styles.width = 'auto';
-    } else if (horizontal === 'relative') {
-      styles.width = `${(width || blockProps.resizeData.width || 40)}%`;
-    } else if (horizontal === 'absolute') {
-      styles.width = `${(width || blockProps.resizeData.width || 40)}px`;
+    } else if (
+      (horizontal === 'relative' || horizontal === 'absolute') &&
+      (width || blockProps.resizeData.width)
+    ) {
+      styles.width = `${width || blockProps.resizeData.width}${
+        horizontal === 'relative' ? '%' : 'px'
+      }`;
     }
 
     if (vertical === 'auto') {
       styles.height = 'auto';
-    } else if (vertical === 'relative') {
-      styles.height = `${(height || blockProps.resizeData.height || 40)}%`;
-    } else if (vertical === 'absolute') {
-      styles.height = `${(height || blockProps.resizeData.height || 40)}px`;
+    } else if (
+      (vertical === 'relative' || vertical === 'absolute') &&
+      (height || blockProps.resizeData.height)
+    ) {
+      styles.height = `${height || blockProps.resizeData.height}${
+        vertical === 'relative' ? '%' : 'px'
+      }`;
     }
 
     // Handle cursor
