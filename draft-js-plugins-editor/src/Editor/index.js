@@ -10,18 +10,31 @@ import { Map } from 'immutable';
 import proxies from './proxies';
 import moveSelectionToEnd from './moveSelectionToEnd';
 import resolveDecorators from './resolveDecorators';
-import * as defaultKeyBindingPlugin from './defaultKeyBindingPlugin';
+import defaultKeyBindings from './defaultKeyBindings';
+import defaultKeyCommands from './defaultKeyCommands';
+
+const getDecoratorLength = (obj) => {
+  let decorators;
+
+  if (obj.decorators != null) {
+    decorators = obj.decorators;
+  } else if (obj._decorators != null) {
+    decorators = obj._decorators;
+  }
+
+  return decorators.size != null ? decorators.size : decorators.length;
+};
 
 /**
  * The main editor component
  */
 class PluginEditor extends Component {
-
   static propTypes = {
     editorState: PropTypes.object.isRequired,
     onChange: PropTypes.func.isRequired,
     plugins: PropTypes.array,
     defaultKeyBindings: PropTypes.bool,
+    defaultKeyCommands: PropTypes.bool,
     defaultBlockRenderMap: PropTypes.bool,
     customStyleMap: PropTypes.object,
     // eslint-disable-next-line react/no-unused-prop-types
@@ -31,6 +44,7 @@ class PluginEditor extends Component {
   static defaultProps = {
     defaultBlockRenderMap: true,
     defaultKeyBindings: true,
+    defaultKeyCommands: true,
     customStyleMap: {},
     plugins: [],
     decorators: [],
@@ -67,13 +81,15 @@ class PluginEditor extends Component {
     const currDec = curr.editorState.getDecorator();
     const nextDec = next.editorState.getDecorator();
 
+    // If there is not current decorator, there's nothing to carry over to the next editor state
+    if (!currDec) return;
+    // If the current decorator is the same as the new one, don't call onChange to avoid infinite loops
     if (currDec === nextDec) return;
-    if (currDec && nextDec && currDec.decorators.size === nextDec.decorators.size) return;
-    if (!currDec && nextDec) return;
+    // If the old and the new decorator are the same, but no the same object, also don't call onChange to avoid infinite loops
+    if (currDec && nextDec && getDecoratorLength(currDec) === getDecoratorLength(nextDec)) return;
 
-    const decorator = curr.editorState.getDecorator();
-    const editorState = EditorState.set(next.editorState, { decorator });
-    this.onChange(editorState);
+    const editorState = EditorState.set(next.editorState, { decorator: currDec });
+    this.onChange(moveSelectionToEnd(editorState));
   }
 
   componentWillUnmount() {
@@ -236,8 +252,11 @@ class PluginEditor extends Component {
 
   resolvePlugins = () => {
     const plugins = this.props.plugins.slice(0);
-    if (this.props.defaultKeyBindings) {
-      plugins.push(defaultKeyBindingPlugin);
+    if (this.props.defaultKeyBindings === true) {
+      plugins.push(defaultKeyBindings);
+    }
+    if (this.props.defaultKeyCommands === true) {
+      plugins.push(defaultKeyCommands);
     }
 
     return plugins;
@@ -285,8 +304,8 @@ class PluginEditor extends Component {
 
       if (accessibilityProps.ariaExpanded === undefined) {
         popupProps.ariaExpanded = props.ariaExpanded;
-      } else if (props.ariaExpanded === 'true') {
-        popupProps.ariaExpanded = 'true';
+      } else if (props.ariaExpanded === true) {
+        popupProps.ariaExpanded = true;
       }
 
       accessibilityProps = {

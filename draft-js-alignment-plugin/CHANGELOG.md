@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## To Be Released
+## 2.0.3 - 2.0.4
+- bumped find-with-regex
 
-### Released the first working of DraftJS State Plugin
+## 2.0.2
+- added options to configure styling of alignment buttons
+
+### Released the first working of DraftJS Alignment Plugin

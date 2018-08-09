@@ -1,4 +1,5 @@
 import React from 'react';
+import 'style-loader!css-loader!draft-js/dist/Draft.css'; // eslint-disable-line import/no-unresolved
 
 import { storiesOf } from '@storybook/react';
 // import { action } from '@storybook/addon-actions';
@@ -6,6 +7,7 @@ import { storiesOf } from '@storybook/react';
 
 // Alignment
 import SimpleAlignmentEditor from './Alignment/SimpleAlignmentEditor';
+import ThemedAlignmentEditor from './Alignment/ThemedAlignmentEditor';
 
 // Anchor
 import AnchorSimpleLinkPluginEditor from './Anchor/SimpleLinkPluginEditor';
@@ -37,6 +39,7 @@ import AddImageEditor from './Image/AddImageEditor';
 import SimpleInlineToolbarEditor from './InlineToolbar/SimpleInlineToolbarEditor';
 import CustomInlineToolbarEditor from './InlineToolbar/CustomInlineToolbarEditor';
 import ThemedInlineToolbarEditor from './InlineToolbar/ThemedInlineToolbarEditor';
+import RelativeParentInlineToolbarEditor from './InlineToolbar/RelativeParentInlineToolbarEditor';
 
 // Linkify
 import SimpleLinkifyEditor from './Linkify/SimpleLinkifyEditor';
@@ -53,6 +56,7 @@ import MentionEditorWithCustomTrigger from './Mention/MentionEditorWithCustomTri
 // SideToolbar
 import SimpleSideToolbarEditor from './SideToolbar/SimpleSideToolbarEditor';
 import CustomSideToolbarEditor from './SideToolbar/CustomSideToolbarEditor';
+import RelativeParentSideToolbarEditor from './SideToolbar/RelativeParentSideToolbarEditor';
 
 // Sticker
 import SimpleStickerEditor from './Sticker/SimpleStickerEditor';
@@ -72,8 +76,12 @@ import CustomToolbarEditor from './StaticToolbar/CustomToolbarEditor';
 import ThemedToolbarEditor from './StaticToolbar/ThemedToolbarEditor';
 import SimpleToolbarEditor from './StaticToolbar/SimpleToolbarEditor';
 
+// Divider
+import DividerWithSideToolbarEditor from './Divider/DividerWithSideToolbarEditor';
+
 storiesOf('Alignment Plugin', module)
-  .add('Editor with Alignment Plugin', () => <SimpleAlignmentEditor />);
+  .add('Editor with Alignment Plugin', () => <SimpleAlignmentEditor />)
+  .add('Editor with custom themed Alignment Plugin', () => <ThemedAlignmentEditor />);
 
 storiesOf('Anchor Plugin', module)
   .add('Editor with Anchor Plugin', () => <AnchorSimpleLinkPluginEditor />);
@@ -104,7 +112,8 @@ storiesOf('Image Plugin')
 storiesOf('Inline Toolbar Plugin')
   .add('Editor with default inline toolbar plugin', () => <SimpleInlineToolbarEditor />)
   .add('Editor with inline toolbar plugin containing all buttons', () => <CustomInlineToolbarEditor />)
-  .add('Editor with custom themed toolbar plugin', () => <ThemedInlineToolbarEditor />);
+  .add('Editor with custom themed toolbar plugin', () => <ThemedInlineToolbarEditor />)
+  .add('Relatively positioned parent', () => <RelativeParentInlineToolbarEditor />);
 
 storiesOf('Linkify Plugin')
   .add('Editor with Linkify Plugin', () => <SimpleLinkifyEditor />)
@@ -120,7 +129,8 @@ storiesOf('Mention Plugin')
 
 storiesOf('Side Toolbar Plugin')
   .add('Editor with SideToolbar Plugin', () => <SimpleSideToolbarEditor />)
-  .add('Editor with custom themed SideToolbar Plugin', () => <CustomSideToolbarEditor />);
+  .add('Editor with custom themed SideToolbar Plugin', () => <CustomSideToolbarEditor />)
+  .add('Relatively positioned parent', () => <RelativeParentSideToolbarEditor />);
 
 storiesOf('Sticker Plugin')
   .add('Editor with Sticker Plugin', () => <SimpleStickerEditor />)
@@ -139,3 +149,6 @@ storiesOf('StaticToolbar Plugin')
   .add('CustomToolbarEditor', () => <CustomToolbarEditor />)
   .add('Simple toolbar editor', () => <SimpleToolbarEditor />)
   .add('ThemedToolbarEditor', () => <ThemedToolbarEditor />);
+
+storiesOf('Divider Plugin')
+  .add('Divider with SideToolbar', () => <DividerWithSideToolbarEditor />);

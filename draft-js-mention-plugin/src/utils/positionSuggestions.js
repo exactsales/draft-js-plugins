@@ -21,12 +21,12 @@ const positionSuggestions = ({ decoratorRect, popover, state, props }) => {
 
     const relativeParentRect = relativeParent.getBoundingClientRect();
     relativeRect.left = decoratorRect.left - relativeParentRect.left;
-    relativeRect.top = decoratorRect.top - relativeParentRect.top;
+    relativeRect.top = decoratorRect.bottom - relativeParentRect.top;
   } else {
     relativeRect.scrollTop = window.pageYOffset || document.documentElement.scrollTop;
     relativeRect.scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
 
-    relativeRect.top = decoratorRect.top;
+    relativeRect.top = decoratorRect.bottom;
     relativeRect.left = decoratorRect.left;
   }
 
@@ -36,7 +36,7 @@ const positionSuggestions = ({ decoratorRect, popover, state, props }) => {
   let transform;
   let transition;
   if (state.isActive) {
-    if (props.suggestions.size > 0) {
+    if (props.suggestions.length > 0) {
       transform = 'scale(1)';
       transition = 'all 0.25s cubic-bezier(.3,1.2,.2,1)';
     } else {

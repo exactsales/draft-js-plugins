@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 2.0.6
+- Added an `id` attribute on the listbox options so the `aria-activedescendant` value refers to the focused option.
+
+## 2.0.4 - 2.0.5
+- bumped find-with-regex
+
+## 2.0.3
+- Added `aria-selected="true"` for the suggestions listbox focused option.
+- Fix aria attributes to use booleans rather than strings (that was a draft-js update that we missed)
+
+## 2.0.2
+- Updated dependencies to support react 16
+- Fixed rendering of emoji 'heart' on Windows 10 + Chrome. By @steven-qi
+- Fixed [this](https://github.com/draft-js-plugins/draft-js-plugins/issues/1041)
+- Fixed editing behavior for emoji-plugin
+
 ## 2.0.0-rc10
 - fixed direct state assignment
 
@@ -10,8 +26,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fix native emojis
 - render props.children instead, fixes editing behaviour
-
-## To Be Released
 
 ### Fixed
 - Added type="button" to EmojiSelect button to prevent submitting forms, thanks to @alanwflood [for the pr](https://github.com/draft-js-plugins/draft-js-plugins/pull/829)

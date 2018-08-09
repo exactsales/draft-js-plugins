@@ -24,6 +24,7 @@ module.exports = {
           path.join(__dirname, '..', 'draft-js-hashtag-plugin', 'src'),
           path.join(__dirname, '..', 'draft-js-linkify-plugin', 'src'),
           path.join(__dirname, '..', 'draft-js-anchor-plugin', 'src'),
+          path.join(__dirname, '..', 'draft-js-plugins-utils', 'src'),
           path.join(__dirname, '..', 'draft-js-mention-plugin', 'src'),
           path.join(__dirname, '..', 'draft-js-sticker-plugin', 'src'),
           path.join(__dirname, '..', 'draft-js-undo-plugin', 'src'),
@@ -40,6 +41,7 @@ module.exports = {
           path.join(__dirname, '..', 'draft-js-resizeable-plugin', 'src'),
           path.join(__dirname, '..', 'draft-js-buttons', 'src'),
           path.join(__dirname, '..', 'draft-js-video-plugin', 'src'),
+          path.join(__dirname, '..', 'draft-js-divider-plugin', 'src'),
         ],
       },
       {
@@ -53,6 +55,7 @@ module.exports = {
           path.join(__dirname, '..', 'draft-js-hashtag-plugin', 'src'),
           path.join(__dirname, '..', 'draft-js-linkify-plugin', 'src'),
           path.join(__dirname, '..', 'draft-js-anchor-plugin', 'src'),
+          path.join(__dirname, '..', 'draft-js-plugins-utils', 'src'),
           path.join(__dirname, '..', 'draft-js-mention-plugin', 'src'),
           path.join(__dirname, '..', 'draft-js-sticker-plugin', 'src'),
           path.join(__dirname, '..', 'draft-js-undo-plugin', 'src'),
@@ -69,6 +72,7 @@ module.exports = {
           path.join(__dirname, '..', 'draft-js-resizeable-plugin', 'src'),
           path.join(__dirname, '..', 'draft-js-buttons', 'src'),
           path.join(__dirname, '..', 'draft-js-video-plugin', 'src'),
+          path.join(__dirname, '..', 'draft-js-divider-plugin', 'src'),
         ],
       }, {
         test: /\.(png|jpg|gif|ico)$/,
@@ -88,6 +92,7 @@ module.exports = {
       'draft-js-sticker-plugin': path.join(__dirname, '..', 'draft-js-sticker-plugin', 'src'),
       'draft-js-undo-plugin': path.join(__dirname, '..', 'draft-js-undo-plugin', 'src'),
       'draft-js-emoji-plugin': path.join(__dirname, '..', 'draft-js-emoji-plugin', 'src'),
+      'draft-js-plugins-utils': path.join(__dirname, '..', 'draft-js-plugins-utils', 'src'),
       'draft-js-counter-plugin': path.join(__dirname, '..', 'draft-js-counter-plugin', 'src'),
       'draft-js-drag-n-drop-plugin': path.join(__dirname, '..', 'draft-js-drag-n-drop-plugin', 'src'),
       'draft-js-drag-n-drop-upload-plugin': path.join(__dirname, '..', 'draft-js-drag-n-drop-upload-plugin', 'src'),
@@ -100,6 +105,7 @@ module.exports = {
       'draft-js-resizeable-plugin': path.join(__dirname, '..', 'draft-js-resizeable-plugin', 'src'),
       'draft-js-buttons': path.join(__dirname, '..', 'draft-js-buttons', 'src'),
       'draft-js-video-plugin': path.join(__dirname, '..', 'draft-js-video-plugin', 'src'),
+      'draft-js-divider-plugin': path.join(__dirname, '..', 'draft-js-divider-plugin', 'src'),
       react: path.join(__dirname, '..', 'node_modules', 'react'),
     },
   }

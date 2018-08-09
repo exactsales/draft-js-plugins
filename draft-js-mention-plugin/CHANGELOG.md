@@ -3,7 +3,28 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## To Be Released
+## 3.0.4
+- Added an `id` attribute on the listbox options so the `aria-activedescendant` value refers to the focused option.
+
+## 3.0.2 - 3.0.3
+- bumped find-with-regex
+
+## 3.0.1
+- Added `aria-selected="true"` for the suggestions listbox focused option.
+- Update aria attributes to use booleans
+
+## 3.0.0
+- Deprecate immutable suggestions (breaking change), use arrays from now on
+- export default theme (in case we want to extend it)
+
+## 2.0.2
+(Much thanks to "dem" aka "Michael Deryugin" - https://github.com/dem)
+- fix suggestions dropdown position in case of line wrap
+- Allow mention popup for styled text
+- Fixed bug where a user typed not existing mention @xxx and cursor is not moved with up/down arrow key
+- Updated dependencies to support react 16
+
+## 2.0 alpha
 
 ### Added
 
@@ -41,6 +62,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Fixed race condition where the SuggestionPortal would unregister and not register again when inputting Japanese, etc.
 - Fixed bug where `mentionPrefix` does not appear in `editorState`. `mentionPrefix` is no longer passed to `mentionComponent`.
 - Fixed bug where `onSearchChange` didn't fire when a user switched between two different mention autocompletions with the same search value. Now it will trigger `onSearchChange` in such a case.
+- Fixed unrecognized `isFocused` React prop.
 
 ## 1.1.2 - 2016-06-26
 
