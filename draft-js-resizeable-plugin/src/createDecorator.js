@@ -1,20 +1,20 @@
-import React, { Component } from "react";
-import ReactDOM from "react-dom";
+import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 
-const getDisplayName = WrappedComponent => {
+const getDisplayName = (WrappedComponent) => {
   const component = WrappedComponent.WrappedComponent || WrappedComponent;
-  return component.displayName || component.name || "Component";
+  return component.displayName || component.name || 'Component';
 };
 
 const round = (x, steps) => Math.ceil(x / steps) * steps;
 
-export default ({ config, store }) => WrappedComponent =>
+export default ({ config, store }) => (WrappedComponent) =>
   class BlockResizeableDecorator extends Component {
     static displayName = `BlockDraggable(${getDisplayName(WrappedComponent)})`;
     static WrappedComponent =
       WrappedComponent.WrappedComponent || WrappedComponent;
     static defaultProps = {
-      horizontal: "relative",
+      horizontal: 'relative',
       vertical: false,
       resizeSteps: 1,
       ...config
@@ -24,7 +24,7 @@ export default ({ config, store }) => WrappedComponent =>
       clicked: false
     };
 
-    setEntityData = data => {
+    setEntityData = (data) => {
       this.props.blockProps.setResizeData(data);
     };
 
@@ -38,7 +38,7 @@ export default ({ config, store }) => WrappedComponent =>
 
     // used to save the hoverPosition so it can be leveraged to determine if a
     // drag should happen on mousedown
-    mouseMove = evt => {
+    mouseMove = (evt) => {
       const { vertical, horizontal } = this.props;
 
       const hoverPosition = this.state.hoverPosition;
@@ -50,11 +50,11 @@ export default ({ config, store }) => WrappedComponent =>
       const x = evt.clientX - b.left;
       const y = evt.clientY - b.top;
 
-      const isTop = vertical && vertical !== "auto" ? y < tolerance : false;
+      const isTop = vertical && vertical !== 'auto' ? y < tolerance : false;
       const isLeft = horizontal ? x < tolerance : false;
       const isRight = horizontal ? x >= b.width - tolerance : false;
       const isBottom =
-        vertical && vertical !== "auto"
+        vertical && vertical !== 'auto'
           ? y >= b.height - tolerance && y < b.height
           : false;
 
@@ -68,7 +68,7 @@ export default ({ config, store }) => WrappedComponent =>
         canResize
       };
       const hasNewHoverPositions = Object.keys(newHoverPosition).filter(
-        key => hoverPosition[key] !== newHoverPosition[key]
+        (key) => hoverPosition[key] !== newHoverPosition[key]
       );
 
       if (hasNewHoverPositions.length) {
@@ -77,7 +77,7 @@ export default ({ config, store }) => WrappedComponent =>
     };
 
     // Handle mousedown for resizing
-    mouseDown = event => {
+    mouseDown = (event) => {
       // No mouse-hover-position data? Nothing to resize!
       if (!this.state.hoverPosition.canResize) {
         return;
@@ -103,11 +103,11 @@ export default ({ config, store }) => WrappedComponent =>
       );
 
       // Do the actual drag operation
-      const doDrag = dragEvent => {
+      const doDrag = (dragEvent) => {
         let width =
           startWidth +
           (isLeft ? startX - dragEvent.clientX : dragEvent.clientX - startX);
-        let height = startHeight + dragEvent.clientY - startY;
+        let height = (startHeight + dragEvent.clientY) - startY;
 
         const editorComp = store.getEditorRef();
         // this keeps backwards-compatibility with react 15
@@ -122,19 +122,19 @@ export default ({ config, store }) => WrappedComponent =>
         const heightPerc = (100 / editorNode.clientHeight) * height;
 
         const newState = {};
-        if ((isLeft || isRight) && horizontal === "relative") {
+        if ((isLeft || isRight) && horizontal === 'relative') {
           newState.width = resizeSteps
             ? round(widthPerc, resizeSteps)
             : widthPerc;
-        } else if ((isLeft || isRight) && horizontal === "absolute") {
+        } else if ((isLeft || isRight) && horizontal === 'absolute') {
           newState.width = resizeSteps ? round(width, resizeSteps) : width;
         }
 
-        if ((isTop || isBottom) && vertical === "relative") {
+        if ((isTop || isBottom) && vertical === 'relative') {
           newState.height = resizeSteps
             ? round(heightPerc, resizeSteps)
             : heightPerc;
-        } else if ((isTop || isBottom) && vertical === "absolute") {
+        } else if ((isTop || isBottom) && vertical === 'absolute') {
           newState.height = resizeSteps ? round(height, resizeSteps) : height;
         }
 
@@ -146,8 +146,8 @@ export default ({ config, store }) => WrappedComponent =>
       // Finished dragging
       const stopDrag = () => {
         // TODO clean up event listeners
-        document.removeEventListener("mousemove", doDrag, false);
-        document.removeEventListener("mouseup", stopDrag, false);
+        document.removeEventListener('mousemove', doDrag, false);
+        document.removeEventListener('mouseup', stopDrag, false);
 
         const { width, height } = this.state;
         this.setState({ clicked: false });
@@ -155,8 +155,8 @@ export default ({ config, store }) => WrappedComponent =>
       };
 
       // TODO clean up event listeners
-      document.addEventListener("mousemove", doDrag, false);
-      document.addEventListener("mouseup", stopDrag, false);
+      document.addEventListener('mousemove', doDrag, false);
+      document.addEventListener('mouseup', stopDrag, false);
 
       this.setState({ clicked: true });
     };
@@ -174,57 +174,57 @@ export default ({ config, store }) => WrappedComponent =>
       const { width, height, hoverPosition } = this.state;
       const { isTop, isLeft, isRight, isBottom } = hoverPosition;
 
-      const styles = { position: "relative", ...style };
+      const styles = { position: 'relative', ...style };
 
-      if (horizontal === "auto") {
-        styles.width = "auto";
+      if (horizontal === 'auto') {
+        styles.width = 'auto';
       } else if (
-        (horizontal === "relative" || horizontal === "absolute") &&
+        (horizontal === 'relative' || horizontal === 'absolute') &&
         (width || blockProps.resizeData.width)
       ) {
         styles.width = `${width || blockProps.resizeData.width}${
-          horizontal === "relative" ? "%" : "px"
+          horizontal === 'relative' ? '%' : 'px'
         }`;
       }
 
-      if (vertical === "auto") {
-        styles.height = "auto";
+      if (vertical === 'auto') {
+        styles.height = 'auto';
       } else if (
-        (vertical === "relative" || vertical === "absolute") &&
+        (vertical === 'relative' || vertical === 'absolute') &&
         (height || blockProps.resizeData.height)
       ) {
         styles.height = `${height || blockProps.resizeData.height}${
-          vertical === "relative" ? "%" : "px"
+          vertical === 'relative' ? '%' : 'px'
         }`;
       }
 
       // Handle cursor
       if ((isRight && isBottom) || (isLeft && isTop)) {
-        styles.cursor = "nwse-resize";
+        styles.cursor = 'nwse-resize';
       } else if ((isRight && isTop) || (isBottom && isLeft)) {
-        styles.cursor = "nesw-resize";
+        styles.cursor = 'nesw-resize';
       } else if (isRight || isLeft) {
-        styles.cursor = "ew-resize";
+        styles.cursor = 'ew-resize';
       } else if (isBottom || isTop) {
-        styles.cursor = "ns-resize";
+        styles.cursor = 'ns-resize';
       } else {
-        styles.cursor = "default";
+        styles.cursor = 'default';
       }
 
       const interactionProps = store.getReadOnly()
         ? {}
         : {
-            onMouseDown: this.mouseDown,
-            onMouseMove: this.mouseMove,
-            onMouseLeave: this.mouseLeave
-          };
+          onMouseDown: this.mouseDown,
+          onMouseMove: this.mouseMove,
+          onMouseLeave: this.mouseLeave
+        };
 
       return (
         <WrappedComponent
           {...elementProps}
           {...interactionProps}
           blockProps={blockProps}
-          ref={element => {
+          ref={(element) => {
             this.wrapper = element;
           }}
           style={styles}
