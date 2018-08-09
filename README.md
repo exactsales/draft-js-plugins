@@ -6,6 +6,14 @@ High quality plugins with great UX on top of [DraftJS](https://github.com/facebo
 
 [![Build Status](https://travis-ci.org/draft-js-plugins/draft-js-plugins.svg?branch=master)](https://travis-ci.org/draft-js-plugins/draft-js-plugins)
 
+# Porque esse fork foi criado
+
+Fork foi criado para ajustar alguns pontos no draft-js-resizeable-plugin:
+
+- remover a limitação do tamanho maximo baseado no tamanho do editor (nosso editor possui scroll, então não tem problema a imagem ser maior que o editor)
+- remove o tamanho default de 40px quando o tamanho não é setado na entity (assim, ele pega o tamanho todo da imagem, ao invés dos 40px/40% que hoje é atribuido por padrão).
+  Para adicionar essa versão do plugin: `yarn add git://github.com/exactsales/draft-js-plugins.git#draft-js-resizeable-plugin@v<VERSÃO DO PLUGIN>`
+
 ## Available Plugins (incl. Docs)
 
 - [Alignment](https://www.draft-js-plugins.com/plugin/alignment)
@@ -61,7 +69,7 @@ $ npm install draft-js-plugins-editor --save
 Then import the editor somewhere in your code and you're ready to go!
 
 ```js
-import Editor from 'draft-js-plugins-editor';
+import Editor from "draft-js-plugins-editor";
 ```
 
 ## Documentation
@@ -72,42 +80,38 @@ import Editor from 'draft-js-plugins-editor';
 
 An editor component accepting plugins. [see source](https://github.com/draft-js-plugins/draft-js-plugins/blob/master/draft-js-plugins-editor/src/Editor/index.js#L16)
 
-| Props                                          | Description  | Required
-| -----------------------------------------------|:------------:| -------:|
-| editorState                                    | [see here](https://facebook.github.io/draft-js/docs/api-reference-editor-state.html#content)| * |
-| onChange                                       | [see here](https://facebook.github.io/draft-js/docs/api-reference-editor.html#onchange)| * |
-| plugins                                        | an array of plugins |  |
-| decorators                                     | an array of custom decorators |  |
-| defaultKeyBindings                             | bool |  |
-| defaultBlockRenderMap                          | bool |  |
-| all other props accepted by the DraftJS Editor except decorator | [see here](https://facebook.github.io/draft-js/docs/api-reference-editor.html#props) |  |
+| Props                                                           |                                         Description                                          | Required |
+| --------------------------------------------------------------- | :------------------------------------------------------------------------------------------: | -------: |
+| editorState                                                     | [see here](https://facebook.github.io/draft-js/docs/api-reference-editor-state.html#content) |       \* |
+| onChange                                                        |   [see here](https://facebook.github.io/draft-js/docs/api-reference-editor.html#onchange)    |       \* |
+| plugins                                                         |                                     an array of plugins                                      |          |
+| decorators                                                      |                                an array of custom decorators                                 |          |
+| defaultKeyBindings                                              |                                             bool                                             |          |
+| defaultBlockRenderMap                                           |                                             bool                                             |          |
+| all other props accepted by the DraftJS Editor except decorator |     [see here](https://facebook.github.io/draft-js/docs/api-reference-editor.html#props)     |          |
 
 Usage:
 
 ```js
-import React, { Component } from 'react';
-import Editor from 'draft-js-plugins-editor';
-import createHashtagPlugin from 'draft-js-hashtag-plugin';
-import createLinkifyPlugin from 'draft-js-linkify-plugin';
-import { EditorState } from 'draft-js';
+import React, { Component } from "react";
+import Editor from "draft-js-plugins-editor";
+import createHashtagPlugin from "draft-js-hashtag-plugin";
+import createLinkifyPlugin from "draft-js-linkify-plugin";
+import { EditorState } from "draft-js";
 
 const hashtagPlugin = createHashtagPlugin();
 const linkifyPlugin = createLinkifyPlugin();
 
-const plugins = [
-  hashtagPlugin,
-  linkifyPlugin,
-];
+const plugins = [hashtagPlugin, linkifyPlugin];
 
 export default class UnicornEditor extends Component {
-
   state = {
-    editorState: EditorState.createEmpty(),
+    editorState: EditorState.createEmpty()
   };
 
-  onChange = (editorState) => {
+  onChange = editorState => {
     this.setState({
-      editorState,
+      editorState
     });
   };
 
@@ -128,6 +132,7 @@ export default class UnicornEditor extends Component {
 Feel free to copy any of the existing plugins as a starting point.In this repository you can also find a [Guide](https://github.com/draft-js-plugins/draft-js-plugins/blob/master/HOW_TO_CREATE_A_PLUGIN.md) on how to create a plugin, including a description of the supported features. In addition you can contact [@nikgraf](https://github.com/nikgraf) directly in case you need help or simply open a Github Issue!
 
 ## Discussion and Support
+
 Join the channel #draft-js-plugins after signing into the DraftJS [Slack organization](https://draftjs.herokuapp.com) or check out our collection of frequently asked questions here: [FAQ](https://github.com/draft-js-plugins/draft-js-plugins/blob/master/FAQ.md).
 
 ## Development
